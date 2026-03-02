@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Short Links</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<%- include("partials/header") %>
+
+<div class="container">
+  <h1>Your Shortened URLs</h1>
+
+  <% if (!links.length) { %>
+    <p>No links yet</p>
+  <% } %>
+
+  <ul class="short-list">
+    <% links.forEach(link => { %>
+
+      <%
+        const truncatedURL =
+          link.url.length > 45
+            ? link.url.slice(0, 45) + "..."
+            : link.url;
+      %>
+
+      <li class="short-item">
+        <a class="short-link" href="/<%= link.shortCode %>" target="_blank">
+          <%= host %>/<%= link.shortCode %>
+        </a>
+
+        <span class="original-url">
+          → <%= truncatedURL %>
+        </span>
+      </li>
+
+    <% }) %>
+  </ul>
+</div>
+
+<%- include("partials/footer") %>
+
+</body>
+</html>

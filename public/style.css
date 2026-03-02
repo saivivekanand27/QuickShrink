@@ -6,67 +6,97 @@
 }
 
 body {
-  background: radial-gradient(circle at top, #1f2933, #0b0f14);
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at top, #1f2933, #05070b);
+}
+
+/* glow background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,255,213,.18), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0,179,255,.14), transparent 40%);
+  z-index: -1;
+}
+
+/* center app */
+.app {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 40px;
 }
 
-/* Glass card */
+/* glass card */
 .container {
-  width: 420px;
-  padding: 36px;
-  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  padding: 42px;
+  border-radius: 24px;
 
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,255,255,0.14);
 
-  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  box-shadow:
+    0 45px 100px rgba(0,0,0,0.85),
+    inset 0 0 20px rgba(255,255,255,.05);
+
+  animation: floatIn .7s ease;
 }
 
-/* Headings */
+@keyframes floatIn {
+  from {opacity:0; transform:translateY(40px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* headings */
+
 h1 {
   color: #e5f0ff;
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 28px;
-  letter-spacing: 0.8px;
+  font-size: 32px;
+  margin-bottom: 34px;
 }
 
 h2 {
   color: #9fb4ff;
   text-align: center;
-  margin-top: 30px;
-  font-weight: 500;
+  margin-top: 40px;
+  font-size: 20px;
 }
 
-/* Form fields */
+/* fields */
+
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 label {
-  color: #9aa7b5;
-  font-size: 13px;
-  margin-bottom: 6px;
   display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #9aa7b5;
 }
 
-/* Inputs */
+/* inputs */
+
 input {
   width: 100%;
-  padding: 13px;
-  border-radius: 12px;
+  padding: 15px;
+  border-radius: 14px;
   border: none;
   outline: none;
 
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.1);
   color: white;
   font-size: 15px;
 
-  transition: 0.3s;
+  transition: .3s;
 }
 
 input::placeholder {
@@ -74,51 +104,93 @@ input::placeholder {
 }
 
 input:focus {
-  box-shadow: 0 0 0 2px #00ffd5;
+  box-shadow: 0 0 0 2px #00ffd5, 0 0 15px rgba(0,255,213,.6);
 }
 
-/* Neon button */
+/* button */
+
 button {
   width: 100%;
-  padding: 14px;
-  border-radius: 14px;
+  padding: 15px;
+  border-radius: 16px;
   border: none;
 
   background: linear-gradient(135deg, #00ffd5, #00b3ff);
   color: #001a1f;
 
-  font-weight: 700;
   font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
 
-  transition: 0.3s;
-  box-shadow: 0 0 25px rgba(0,255,213,0.6);
+  box-shadow: 0 0 30px rgba(0,255,213,.6);
+  transition: .3s;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(0,255,213,0.9);
+  box-shadow: 0 0 45px rgba(0,255,213,.9);
 }
 
-/* Result list */
+/* list */
+
 ul {
-  margin-top: 15px;
   list-style: none;
+  margin-top: 20px;
 }
 
 li {
-  background: rgba(255,255,255,0.08);
-  color: #e9f1ff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 
-  padding: 12px 14px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
 
   border-left: 3px solid #00ffd5;
+  transition: .3s;
 
-  transition: 0.3s;
+  color: #e9f1ff;
+}
+
+li a {
+  color: #00ffd5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+li span {
+  font-size: 13px;
+  color: #b6c4d6;
 }
 
 li:hover {
   transform: translateX(6px);
+  box-shadow: 0 0 18px rgba(0,255,213,.45);
+}
+
+.short-list {
+  list-style: none;
+  padding: 0;
+}
+
+.short-item {
+  background: #1e293b;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  word-break: break-word;
+}
+
+.short-link {
+  color: #22d3ee;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.original-url {
+  color: #cbd5f5;
+  font-size: 0.9rem;
 }

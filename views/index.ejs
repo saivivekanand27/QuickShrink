@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<%- include("partials/header") %>
+
+<% if (user) { %>
+  <h2>You are logged in</h2>
+<% } else { %>
+  <h2>You are not logged in</h2>
+<% } %>
+
+<div class="container">
+  <h1>URL Shortener</h1>                    
+
+  <form method="POST" action="/">
+    <div class="field">
+      <label>Enter URL</label>
+      <input type="url" name="url" required />
+    </div>
+
+    <div class="field">
+      <label>Short Code (optional)</label>
+      <input type="text" name="shortCode" />
+    </div>
+
+    <button type="submit">Shorten URL</button>
+  </form>
+
+  <h2>Shortened URLs</h2>
+
+  <ul>
+    <% links.forEach(link => { %>
+      <%
+        const truncatedURL =
+          link.url.length > 30
+            ? link.url.slice(0, 30) + "..."
+            : link.url;
+      %>
+
+      <li>
+        <a href="/<%= link.shortCode %>" target="_blank">
+          <%= host %>/<%= link.shortCode %>
+        </a>
+        → <%= truncatedURL %>
+      </li>
+    <% }) %>
+  </ul>
+
+</div>
+
+<%- include("partials/footer") %>
+
+</body>
+</html>

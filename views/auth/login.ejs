@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#0f172a;
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+}
+
+.image-box img{
+    width:320px;
+    border-radius:16px;
+    box-shadow:0 0 25px rgba(0,0,0,.6);
+}
+
+.container{
+    background:#1e293b;
+    padding:40px;
+    width:350px;
+    border-radius:14px;
+    box-shadow:0 0 25px rgba(0,0,0,.6);
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#06b6d4;
+    color:black;
+    font-weight:bold;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#22d3ee;
+}
+
+a{
+    color:#38bdf8;
+    display:block;
+    margin-top:15px;
+    text-decoration:none;
+}
+
+.flash-error{
+    color:#f87171;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<%- include('../partials/header') %>
+
+<div class="main">
+
+  <div class="image-box">
+    <img src="/images/signin-image.jpg" alt="Login Illustration">
+  </div>
+
+  <div class="container">
+
+    <h2>Login</h2>
+
+    <form action="/login" method="POST">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+
+      <% if (errors && errors.length) { %>
+        <% errors.forEach(err => { %>
+          <p class="flash-error"><%= err %></p>
+        <% }) %>
+      <% } %>
+
+      <button>Login</button>
+    </form>
+
+    <a href="/register">Create account</a>
+
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+</body>
+</html>

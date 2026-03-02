@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#020617;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.signup-box{
+    background:#1e293b;
+    display:flex;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 0 30px rgba(0,0,0,.6);
+}
+
+.form{
+    padding:40px;
+    width:320px;
+}
+
+.form h2{
+    margin-bottom:20px;
+}
+
+.form input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background:#334155;
+    border:none;
+    border-radius:8px;
+    color:white;
+}
+
+.form input::placeholder{
+    color:#cbd5e1;
+}
+
+.form button{
+    width:100%;
+    padding:12px;
+    background:#22c55e;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.form button:hover{
+    background:#4ade80;
+}
+
+.image{
+    width:320px;
+    background:#020617;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.image img{
+    width:100%;
+    object-fit:contain;
+    filter: drop-shadow(0 0 18px rgba(56,189,248,.35));
+}
+
+a{
+    color:#38bdf8;
+    display:block;
+    margin-top:12px;
+    text-align:center;
+}
+
+.flash-error{
+    color:#fb7185;
+}
+</style>
+</head>
+
+<body>
+
+<%- include('../partials/header') %>
+
+<div class="main">
+
+  <div class="signup-box">
+
+    <div class="form">
+      <h2>Create Account</h2>
+
+      <form action="/register" method="POST">
+        <input name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <% if (errors && errors.length) { %>
+          <% errors.forEach(err => { %>
+            <p class="flash-error"><%= err %></p>
+          <% }) %>
+        <% } %>
+
+        <button>Create Account</button>
+      </form>
+
+      <a href="/login">Already have an account?</a>
+    </div>
+
+    <!-- IMAGE SIDE -->
+    <div class="image">
+      <img src="/images/signup-image.jpg" alt="Register Illustration">
+    </div>
+
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>
+
+</body>
+</html>
